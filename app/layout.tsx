@@ -13,7 +13,7 @@ const IPMPlex = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   title: "Imagen Fai",
-  description: "Genrate your one Images",
+  description: "Generate your own Images",
 };
 
 export default function RootLayout({
