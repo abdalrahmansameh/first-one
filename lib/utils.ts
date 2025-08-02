@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 //* eslint-disable no-prototype-builtins */
-import { aspectRatioOptions } from "@/constans";
+import { aspectRatioOptions } from "@/constants";
 import { type ClassValue, clsx } from "clsx";
 import qs from "qs";
 import { twMerge } from "tailwind-merge";

@@ -55,6 +55,6 @@ const UserSchema = new Schema({
     
 });
 
-const User = models?.Users || model('User', UserSchema);
+const User = models?.User || model("User", UserSchema);
 
-export default User
+export default User;
