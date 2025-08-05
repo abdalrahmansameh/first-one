@@ -13,7 +13,7 @@
     "@clerk/elements": "^0.23.48",
     "@clerk/nextjs": "^6.24.0",
     "@clerk/shared": "^3.17.0",
-    "@hookform/resolvers": "^5.2.1",
+    "@hookform/resolvers": "3.3.1",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
