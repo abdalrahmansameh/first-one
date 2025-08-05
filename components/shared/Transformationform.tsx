@@ -2,7 +2,7 @@
 "use client";
 import React, { useEffect, useState, useTransition } from "react";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   Select,
