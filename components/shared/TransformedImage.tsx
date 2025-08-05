@@ -8,7 +8,7 @@ import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props'
 const TransformedImage = ({
   image,
   type,
-  title,
+  // title,
   transformationConfig,
   isTransforming,
   setIsTransforming,
@@ -49,10 +49,12 @@ const TransformedImage = ({
             placeholder={dataUrl as PlaceholderValue}
             className="transformed-image"
             onLoad={() => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               setIsTransforming && setIsTransforming(false);
             }}
             onError={() => {
               debounce(() => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
                 setIsTransforming && setIsTransforming(false);
               }, 800);
             }}

@@ -1,54 +1,53 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { toast } from "sonner"
-import { CldImage, CldUploadWidget } from "next-cloudinary"
-import Image from "next/image"
-import { dataUrl, getImageSize } from "@/lib/utils"
-import { PlaceholderValue } from "next/dist/shared/lib/get-img-props"
+import { toast } from "sonner";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
+import { dataUrl, getImageSize } from "@/lib/utils";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 
 type MediaUploaderProps = {
-    onValueChange: (value: string) => void,
-    setImage: React.Dispatch<any>,
-    image: any,
-    publicId: string,
-    type: string
-}
+  onValueChange: (value: string) => void;
+  setImage: React.Dispatch<any>;
+  image: any;
+  publicId: string;
+  type: string;
+};
 
 const MediaUploader = ({
-    onValueChange,
-    setImage,
-    image,
-    publicId,
-    type
-    }: MediaUploaderProps
-    ) => {
+  onValueChange,
+  setImage,
+  image,
+  publicId,
+  type,
+}: MediaUploaderProps) => {
+  const onUploadSuccessHandler = (result: any) => {
+    setImage((prevState: any) => ({
+      ...prevState,
+      publicId: result?.info?.public_id,
+      url: result?.info?.secure_url,
+      width: result?.info?.width,
+      height: result?.info?.height,
+      secureURL: result?.info?.secure_url,
+    }));
 
-    const onUploadSuccessHandler = (result: any) => {
-        setImage((prevState: any) => ({
-          ...prevState,
-          publicId: result?.info?.public_id,
-          url: result?.info?.secure_url,
-          width: result?.info?.width,
-          height: result?.info?.height,
-          secureURL: result?.info?.secure_url,
-        }));
+    onValueChange(result?.info?.secure_url);
 
-        onValueChange(result?.info?.secure_url)
+    toast.success("Image uploaded successfully", {
+      description: "1 credit was deducted from your account",
+      duration: 5000,
+      className: "success-toast ",
+    });
+  };
 
-        toast.success("Image uploaded successfully", {
-            description: "1 credit was deducted from your account",
-            duration: 5000,
-            className: "success-toast ",
-        });
-    }
-
-    const onUploadErrorHandler = () => {
-        toast.error("Something went wrong while uploading the image", {
-          description: "Please try again",
-          duration: 5000,
-          className: "error-toast"
-        });
-    }
+  const onUploadErrorHandler = () => {
+    toast.error("Something went wrong while uploading the image", {
+      description: "Please try again",
+      duration: 5000,
+      className: "error-toast",
+    });
+  };
 
   return (
     <CldUploadWidget
@@ -66,35 +65,35 @@ const MediaUploader = ({
 
           {publicId ? (
             <>
-                <div className="cursor-pointer overflow-hidden rounded-md">
-                    <CldImage
-                        width={getImageSize(type, image, "width")}
-                        height={getImageSize(type, image, "height")}
-                        src={publicId}
-                        alt="uploaded image"
-                        sizes={"(max-width: 768px) 100vw, 50vw"}
-                        placeholder={dataUrl as PlaceholderValue }
-                        className="media-uploader_cldImage"
-                    />
-                </div>
+              <div className="cursor-pointer overflow-hidden rounded-md">
+                <CldImage
+                  width={getImageSize(type, image, "width")}
+                  height={getImageSize(type, image, "height")}
+                  src={publicId}
+                  alt="uploaded image"
+                  sizes={"(max-width: 768px) 100vw, 50vw"}
+                  placeholder={dataUrl as PlaceholderValue}
+                  className="media-uploader_cldImage"
+                />
+              </div>
             </>
           ) : (
             <div className="media-uploader_cta" onClick={() => open()}>
               <div className="media-uploader_cta-image">
-                <Image 
-                    src="/assets/icons/add.svg"
-                    alt="add Image"
-                    width={24}
-                    height={24}
+                <Image
+                  src="/assets/icons/add.svg"
+                  alt="add Image"
+                  width={24}
+                  height={24}
                 />
               </div>
-                <p className="p-14-medium">Click her to upload image</p>
+              <p className="p-14-medium">Click her to upload image</p>
             </div>
           )}
         </div>
       )}
     </CldUploadWidget>
   );
-}
+};
 
-export default MediaUploader
+export default MediaUploader;

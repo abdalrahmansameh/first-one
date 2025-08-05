@@ -1,16 +1,25 @@
-import { Collection } from '@/components/shared/Collection';
-import { navLinks } from '@/constants';
-import { getAllImages } from '@/lib/actions/image.actions';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react'
+// app/(root)/page.tsx
 
-const Home = async ({searchParams}: SearchParamProps) => {
+import { Collection } from "@/components/shared/Collection";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.actions";
+import Image from "next/image";
+import Link from "next/link";
 
-  const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || '';
+// ✅ نوع البراميتر الصحيح
+type SearchParamProps = {
+  searchParams?: Promise<{
+    page?: string;
+    query?: string;
+  }>;
+};
 
-  const images = await getAllImages(page, searchQuery);
+const Home = async ({ searchParams }: SearchParamProps) => {
+  const resolvedSearchParams = await searchParams;
+  const page = Number(resolvedSearchParams?.page) || 1;
+  const searchQuery = (resolvedSearchParams?.query as string) || "";
+
+  const images = await getAllImages({ page, searchQuery });
 
   return (
     <>
@@ -21,32 +30,37 @@ const Home = async ({searchParams}: SearchParamProps) => {
         <h1 className="home-heading">
           Unleash your creative vision Imaginifay
         </h1>
-        <ul className='flex-center w-full gap-20'>
-          {navLinks.slice(1,5).map((link) => (
-            <Link 
+        <ul className="flex-center w-full gap-20">
+          {navLinks.slice(1, 5).map((link) => (
+            <Link
               key={link.route}
               href={link.route}
               className="flex-center flex-col gap-2"
             >
-              <li className='flex-center w-fit rounded-full bg-white p-4'>
-                <Image src={link.icon} alt={link.label} width={24} height={24} />
+              <li className="flex-center w-fit rounded-full bg-white p-4">
+                <Image
+                  src={link.icon}
+                  alt={link.label}
+                  width={24}
+                  height={24}
+                />
               </li>
-              <p className='p-14-medium text-center text-white'>{link.label}</p>
+              <p className="p-14-medium text-center text-white">{link.label}</p>
             </Link>
           ))}
         </ul>
       </section>
 
-      <section className='sm:mt-12'>
-          <Collection 
-            hasSearch={true}
-            images={images?.images}
-            totalPages={images?.totalPages}
-            page={page}
-          />
+      <section className="sm:mt-12">
+        <Collection
+          hasSearch={true}
+          images={images?.images}
+          totalPages={images?.totalPages}
+          page={page}
+        />
       </section>
     </>
   );
-}
+};
 
-export default Home
+export default Home;

@@ -128,7 +128,12 @@ declare type TransformationFormProps = {
 };
 
 declare type TransformedImageProps = {
-  image: unknown;
+  image: {
+    publicId?: string;
+    width?: number;
+    height?: number;
+    aspectRatio?: "1:1" | "3:4" | "9:16";
+  } | null;
   type: string;
   title: string;
   transformationConfig: Transformations | null;

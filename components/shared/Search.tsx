@@ -16,7 +16,7 @@ export const Search = () => {
     const delayDebounceFn = setTimeout(() => {
       if (query) {
         const newUrl = formUrlQuery({
-          searchParams: searchParams.toString(),
+          searchParams: searchParams,
           key: "query",
           value: query,
         });

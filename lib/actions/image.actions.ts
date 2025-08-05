@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -9,96 +10,95 @@ import { redirect } from "next/navigation";
 
 import { v2 as cloudinary } from "cloudinary";
 
-
-
-const populateUser = (query: any) => query.populate({
+const populateUser = (query: any) =>
+  query.populate({
     path: "author",
     model: User,
-    select: "_id firstName lastName"
-});
+    select: "_id firstName lastName",
+  });
 
 //Add image to the database
-export async function addImage({image, userId, path}: AddImageParams) {
-    try {
-        await ConnectToDatabase();
+export async function addImage({ image, userId, path }: AddImageParams) {
+  try {
+    await ConnectToDatabase();
 
-        const author = await User.findById(userId);
+    const author = await User.findById(userId);
 
-        if(!author) {
-            throw new Error("User not found");
-        }
-
-        const newImage = await Image.create({
-            ...image,
-            author: author._id,
-        })
-
-        revalidatePath(path);
-
-        return JSON.parse(JSON.stringify(newImage));
-    }catch (error) {
-        handleError(error);
+    if (!author) {
+      throw new Error("User not found");
     }
+
+    const newImage = await Image.create({
+      ...image,
+      author: author._id,
+    });
+
+    revalidatePath(path);
+
+    return JSON.parse(JSON.stringify(newImage));
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 //  Update image in the database
-export async function updateImage({image, userId, path}: UpdateImageParams) {
-    try {
-        await ConnectToDatabase();
+export async function updateImage({ image, userId, path }: UpdateImageParams) {
+  try {
+    await ConnectToDatabase();
 
-        const imageToUpdate = await Image.findById(image._id);
+    const imageToUpdate = await Image.findById(image._id);
 
-        if(!imageToUpdate || imageToUpdate .author.toHexString() !== userId) {
-            throw new Error("Unauthorized ir image not found");
-        }
-
-        const updatedImage = await Image.findByIdAndUpdate(
-            imageToUpdate._id, 
-            image, 
-            {new: true}
-        );
-
-        revalidatePath(path);
-
-        return JSON.parse(JSON.stringify(updatedImage));
-    }catch (error) {
-        handleError(error);
+    if (!imageToUpdate || imageToUpdate.author.toHexString() !== userId) {
+      throw new Error("Unauthorized ir image not found");
     }
+
+    const updatedImage = await Image.findByIdAndUpdate(
+      imageToUpdate._id,
+      image,
+      { new: true }
+    );
+
+    revalidatePath(path);
+
+    return JSON.parse(JSON.stringify(updatedImage));
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 //  Delete image in the database
 export async function deleteImage(imageId: string) {
-    try {
-        await ConnectToDatabase();
+  try {
+    await ConnectToDatabase();
 
-        await Image.findByIdAndDelete(imageId);
-    }catch (error) {
-        handleError(error);
-    }   finally{
-        redirect("/");
-    }
+    await Image.findByIdAndDelete(imageId);
+  } catch (error) {
+    handleError(error);
+  } finally {
+    redirect("/");
+  }
 }
 
 // Get image from the database
 export async function getImageById(imageId: string) {
-    try {
-        await ConnectToDatabase();
+  try {
+    await ConnectToDatabase();
 
-        const image = await populateUser(Image.findById(imageId));
+    const image = await populateUser(Image.findById(imageId));
 
-        if(!image) throw new Error("Image not found");
+    if (!image) throw new Error("Image not found");
 
-        return JSON.parse(JSON.stringify(image));
-    }catch (error) {
-        handleError(error);
-    }
+    return JSON.parse(JSON.stringify(image));
+  } catch (error) {
+    handleError(error);
+  }
 }
 
 //Get all images from the database
 export async function getAllImages({
   limit = 9,
   page = 1,
-  searchQuery = '',
+  searchQuery = "",
 }: {
   limit?: number;
   page: number;
@@ -114,7 +114,7 @@ export async function getAllImages({
       secure: true,
     });
 
-    let expression = 'folder=imagenfay';
+    let expression = "folder=imagenfay";
 
     if (searchQuery) {
       expression += ` AND ${searchQuery}`;
@@ -124,7 +124,8 @@ export async function getAllImages({
       .expression(expression)
       .execute();
 
-    const resourcesIds = resources.map((res: any) => resources.public_id);
+    // const resourcesIds = resources.map((res: any) => resources.public_id);
+    const resourcesIds = resources.map(() => resources.public_id);
 
     let query = {};
 
