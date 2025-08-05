@@ -27,12 +27,14 @@ const AddTransformationPage = async ({
   return (
     <>
       <Header title={transformation.title} subtitle={transformation.subTitle} />
+      <section className="mt-10">
       <Transformationform
         action="Add"
         userId={user._id}
         type={transformation.type as TransformationType} // تأكد من النوع
         creditBalance={user.creditBalance}
       />
+      </section>
     </>
   );
 };

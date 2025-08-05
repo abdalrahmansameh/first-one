@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <main className="root">
       <Sidebar />
       <MobileNav />
-      <div className="root-container">
+      <div className="root-container mx-auto container px-4 lg:px-8 xl:px-12 2xl:px-16">
         <div className="wrapper">{children}</div>
       </div>
     </main>

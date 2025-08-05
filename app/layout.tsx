@@ -4,6 +4,9 @@ import "./globals.css";
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/sonner";
+
+
 const IPMPlex = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -23,19 +26,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
-    appearance={{
-      variables: { colorPrimary: '#624cf5'}
-    }}
+      appearance={{
+        variables: { colorPrimary: "#624cf5" },
+      }}
     >
-    <html lang="en">
-      <body
-        suppressHydrationWarning
-        className={`${IPMPlex.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <body
+          suppressHydrationWarning
+          className={`${IPMPlex.variable} antialiased`}
+        >
+          {children}
+          <Toaster />
+        </body>
+      </html>
     </ClerkProvider>
-
   );
 }
