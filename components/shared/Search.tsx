@@ -10,7 +10,7 @@ import { formUrlQuery, removeKeysFromQuery } from "@/lib/utils";
 export const Search = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(searchParams.get("query") || "");
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -30,10 +30,10 @@ export const Search = () => {
 
         router.push(newUrl, { scroll: false });
       }
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [router, searchParams, query]);
+  }, [query, router, searchParams]);
 
   return (
     <div className="search">

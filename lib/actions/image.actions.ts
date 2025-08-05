@@ -2,13 +2,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import Image from "../database/models/image.model";
+import User from "../database/models/user.model";
 import { ConnectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
-import User from "../database/models/user.model";
-import Image from "../database/models/image.model";
-import { redirect } from "next/navigation";
-
-import { v2 as cloudinary } from "cloudinary";
 
 const populateUser = (query: any) =>
   query.populate({
@@ -107,32 +105,13 @@ export async function getAllImages({
   try {
     await ConnectToDatabase();
 
-    cloudinary.config({
-      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-      secure: true,
-    });
-
-    let expression = "folder=imagenfay";
-
-    if (searchQuery) {
-      expression += ` AND ${searchQuery}`;
-    }
-
-    const { resources } = await cloudinary.search
-      .expression(expression)
-      .execute();
-
-    // const resourcesIds = resources.map((res: any) => resources.public_id);
-    const resourcesIds = resources.map(() => resources.public_id);
-
     let query = {};
 
     if (searchQuery) {
       query = {
-        publicId: {
-          $in: resourcesIds,
+        title: {
+          $regex: searchQuery,
+          $options: "i",
         },
       };
     }

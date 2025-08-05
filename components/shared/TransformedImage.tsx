@@ -1,9 +1,9 @@
-import React from 'react'
-import { Button } from '../ui/button'
-import Image from 'next/image'
-import { CldImage } from 'next-cloudinary'
-import { dataUrl, debounce, getImageSize } from '@/lib/utils'
-import { PlaceholderValue } from 'next/dist/shared/lib/get-img-props'
+"use client";
+import { dataUrl, debounce, getImageSize } from "@/lib/utils";
+import { CldImage } from "next-cloudinary";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 const TransformedImage = ({
   image,
@@ -63,12 +63,12 @@ const TransformedImage = ({
 
           {isTransforming && (
             <div className="flex justify-center items-center absolute left-[50%] top-[50%] size-full -translate-x-1/2 -translate-y-1/2 flex-col gap-2 rounded-[10px] border bg-dark-700/90">
-                <Image 
-                    src="/assets/icons/spinner.svg"
-                    alt='trmsforming'
-                    width={40}
-                    height={40}
-                />
+              <Image
+                src="/assets/icons/spinner.svg"
+                alt="trmsforming"
+                width={40}
+                height={40}
+              />
             </div>
           )}
         </div>
@@ -79,4 +79,4 @@ const TransformedImage = ({
   );
 };
 
-export default TransformedImage
+export default TransformedImage;
