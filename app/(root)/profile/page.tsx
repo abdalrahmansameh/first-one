@@ -18,7 +18,7 @@ const Profile = async ({ searchParams }: SearchParamProps) => {
 
   const { userId } = await auth();
 
-  // لو مفيش userId رجّع المستخدم لتسجيل الدخول
+  
   if (!userId) return redirect("/sign-in");
 
   const user = await getUserById(userId);
