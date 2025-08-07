@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض تجريبي للاختبار - ali/khan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f3f5;
+      color: #333;
+      padding: 2rem;
+      line-height: 1.8;
+    }
+    .exam-header {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .exam-header h1 {
+      margin: 0.5rem 0;
+      color: #0d6efd;
+    }
+    .info-line {
+      font-size: 1rem;
+      color: #555;
+    }
+    .question-box {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .question-title {
+      font-weight: bold;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .answer-option {
+      background-color: #f8f9fa;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    .essay-area {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 100px;
+    }
+    .connect-table {
+      width: 100%;
+      text-align: right;
+      border-spacing: 10px;
+    }
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    .nav-btn {
+      padding: 0.7rem 2rem;
+      border: none;
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .timer-box {
+      background-color: #fff3cd;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="exam-header">
+    <h1>📘 اختبار تفاعلي</h1>
+    <div class="info-line">اسم الطالب: <strong>أحمد محمد</strong></div>
+    <div class="info-line">المستوى: متوسط - سورة الفجر</div>
+    <div class="timer-box">⏱️ الوقت المتبقي: 10:00</div>
+  </div>
+
+  <div class="question-box">
+    <div class="question-title">1. قم بترتيب الكلمات التالية لتكوين الآية الصحيحة:</div>
+    <div style="text-align:center; font-size: 1.2rem;">
+      <span style="background:#fff3cd; padding:6px 12px; margin:5px; border-radius:8px; display: inline-block;">الشفع</span>
+      <span style="background:#fff3cd; padding:6px 12px; margin:5px; border-radius:8px; display: inline-block;">و</span>
+      <span style="background:#fff3cd; padding:6px 12px; margin:5px; border-radius:8px; display: inline-block;">الفجر</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="question-title">2. ما معنى "الغاشية"؟</div>
+    <div class="answer-option">◯ النوم</div>
+    <div class="answer-option">◉ القيامة</div>
+    <div class="answer-option">◯ السعادة</div>
+  </div>
+
+  <div class="question-box">
+    <div class="question-title">3. سورة الفاتحة مكية.</div>
+    <div class="answer-option">✅ صح</div>
+    <div class="answer-option">❌ خطأ</div>
+  </div>
+
+  <div class="question-box">
+    <div class="question-title">4. وصل بين العناصر الصحيحة:</div>
+    <table class="connect-table">
+      <tr><td>🌙 الليل</td><td>⬅️</td><td>زمن</td></tr>
+      <tr><td>📖 القرآن</td><td>⬅️</td><td>كتاب</td></tr>
+      <tr><td>👦 محمد</td><td>⬅️</td><td>نبي</td></tr>
+    </table>
+  </div>
+
+  <div class="question-box">
+    <div class="question-title">5. اكتب باختصار ماذا تعلمت من سورة العصر؟</div>
+    <div class="essay-area">
+      .............................................................................<br>
+      .............................................................................<br>
+      .............................................................................
+    </div>
+  </div>
+
+  <div class="navigation-buttons">
+    <button class="nav-btn">السابق</button>
+    <button class="nav-btn">التالي</button>
+  </div>
+
+</body>
+</html>
