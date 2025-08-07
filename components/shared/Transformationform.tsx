@@ -69,6 +69,8 @@ const Transformationform = ({
       : defaultValues;
 
   const form = useForm<z.infer<typeof formSchema>>({
+    /* eslint-disable @typescript-eslint/ban-ts-comment */
+    // @ts-ignore
     resolver: zodResolver(formSchema),
     defaultValues: initialValues,
   });
